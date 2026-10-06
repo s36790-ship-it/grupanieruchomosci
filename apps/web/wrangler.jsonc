@@ -16,7 +16,7 @@
   "vars": {
     "FORMULARZ_ODBIORCA": "kontakt@grupa-nieruchomosci.pl",
     "FORMULARZ_NADAWCA": "Grupa Nieruchomości <formularz@grupa-nieruchomosci.pl>",
-    "DOZWOLONE_ORIGINY": "https://grupa-nieruchomosci.pl,https://www.grupa-nieruchomosci.pl"
+    "DOZWOLONE_ORIGINY": "https://xn--grupa-nieruchomoci-mod.pl,https://www.xn--grupa-nieruchomoci-mod.pl"
   }
   // RESEND_API_KEY ustawiamy jako Secret w panelu Cloudflare (albo: npx wrangler secret put RESEND_API_KEY).
   // Nigdy nie wpisujemy go do tego pliku ani do repozytorium.

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://grupa-nieruchomosci.pl/sitemap-index.xml
+Sitemap: https://xn--grupa-nieruchomoci-mod.pl/sitemap-index.xml
