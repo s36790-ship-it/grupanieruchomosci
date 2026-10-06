@@ -1,11 +1,12 @@
 ---
+import { mailto } from '../lib/email';
 interface Props { usluga?: string; }
 const { usluga = 'Strona główna' } = Astro.props;
 
 // W pracy lokalnej mostek podstawia /api pod Payloada; w produkcji ustawiamy PUBLIC_API_URL
 // na adres panelu (np. https://panel.grupa-nieruchomosci.pl/api).
 const ADRES_API = import.meta.env.PUBLIC_API_URL || '/api';
-const EMAIL = 'kontakt@grupa-nieruchomosci.pl';
+const EMAIL = 'kontakt@grupa-nieruchomości.pl';
 ---
 <form class="formularz" method="post" action={`${ADRES_API}/zapytanie`} novalidate data-formularz>
   <input type="hidden" name="usluga" value={usluga} />
@@ -70,7 +71,7 @@ const EMAIL = 'kontakt@grupa-nieruchomosci.pl';
   <button class="przycisk" type="submit" data-wyslij>Wyślij zgłoszenie</button>
   <p class="formularz__stan" role="status" data-stan></p>
   <p class="formularz__mail">
-    Wolisz napisać bezpośrednio? <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    Wolisz napisać bezpośrednio? <a href={mailto(EMAIL)}>{EMAIL}</a>
   </p>
 </form>
 
@@ -131,14 +132,14 @@ const EMAIL = 'kontakt@grupa-nieruchomosci.pl';
         const wynik = await odp.json().catch(() => ({}));
 
         if (!odp.ok || !wynik.ok) {
-          pokaz(wynik.blad ?? 'Nie udało się wysłać zgłoszenia. Napisz na kontakt@grupa-nieruchomosci.pl albo zadzwoń.', 'blad');
+          pokaz(wynik.blad ?? 'Nie udało się wysłać zgłoszenia. Napisz na kontakt@grupa-nieruchomości.pl albo zadzwoń.', 'blad');
           return;
         }
 
         form.reset();
         pokaz('Dziękujemy, zgłoszenie do nas dotarło. Odezwiemy się na podany kontakt.');
       } catch {
-        pokaz('Brak połączenia z serwerem. Napisz na kontakt@grupa-nieruchomosci.pl albo zadzwoń.', 'blad');
+        pokaz('Brak połączenia z serwerem. Napisz na kontakt@grupa-nieruchomości.pl albo zadzwoń.', 'blad');
       } finally {
         guzik.disabled = false;
         guzik.textContent = pierwotny;

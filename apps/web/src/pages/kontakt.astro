@@ -1,11 +1,12 @@
 ---
+import { mailto } from '../lib/email';
 import Base from '../layouts/Base.astro';
 import Formularz from '../components/Formularz.astro';
 import { firma } from '../data/site';
 ---
 <Base
   title="Kontakt — Grupa Nieruchomości Białystok"
-  description="Napisz lub zadzwoń: +48 608 642 999, kontakt@grupa-nieruchomosci.pl. Biuro przy ul. Pięknej 5 w Białymstoku. Wycena nieruchomości jest bezpłatna."
+  description="Napisz lub zadzwoń: +48 608 642 999, kontakt@grupa-nieruchomości.pl. Biuro przy ul. Pięknej 5 w Białymstoku. Wycena nieruchomości jest bezpłatna."
   image="/images/kontakt.jpg"
 >
   <section class="sekcja">
@@ -15,7 +16,7 @@ import { firma } from '../data/site';
         <p>Opisz krótko sytuację albo od razu zaproponuj termin spotkania. Oddzwonimy lub odpiszemy — tak, jak wolisz.</p>
         <dl>
           <div><dt>Telefon</dt><dd><a class="duzy" href={firma.telefonHref}>{firma.telefon}</a></dd></div>
-          <div><dt>E-mail</dt><dd><a href={`mailto:${firma.email}`}>{firma.email}</a></dd></div>
+          <div><dt>E-mail</dt><dd><a href={mailto(firma.email)}>{firma.email}</a></dd></div>
           <div><dt>Biuro</dt><dd>{firma.biuro.ulica}<br />{firma.biuro.kod} {firma.biuro.miasto}</dd></div>
           <div><dt>Obszar działania</dt><dd>{firma.obszar}</dd></div>
           <div><dt>Dane rejestrowe</dt><dd>{firma.nazwaPrawna}<br />{firma.siedziba.ulica}, {firma.siedziba.kod} {firma.siedziba.miasto}<br />NIP {firma.nip}, KRS {firma.krs}</dd></div>

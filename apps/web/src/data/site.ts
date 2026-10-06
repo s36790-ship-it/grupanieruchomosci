@@ -3,7 +3,7 @@ export const firma = {
   nazwaPrawna: 'Grupa Nieruchomości sp. z o.o.',
   telefon: '+48 608 642 999',
   telefonHref: 'tel:+48608642999',
-  email: 'kontakt@grupa-nieruchomosci.pl',
+  email: 'kontakt@grupa-nieruchomości.pl',
   biuro: { ulica: 'ul. Piękna 5, lok. 12P', kod: '15-282', miasto: 'Białystok' },
   siedziba: { ulica: 'ul. Nowogrodzka 64/43', kod: '02-014', miasto: 'Warszawa' },
   nip: '5223200075',

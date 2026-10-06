@@ -1,13 +1,13 @@
 /**
- * Worker Cloudflare dla grupa-nieruchomosci.pl
+ * Worker Cloudflare dla grupa-nieruchomości.pl
  *
  * - Strona jest w pełni statyczna (Astro → dist/) i serwowana jako „static assets” — bez zużycia CPU Workera.
  * - Worker obsługuje tylko POST /api/zapytanie: waliduje zgłoszenie z formularza i wysyła je e-mailem przez Resend.
  *
  * Konfiguracja (Cloudflare → Workers → grupa-nieruchomosci → Settings → Variables and Secrets):
  *   RESEND_API_KEY      (Secret)  klucz z resend.com → API Keys, uprawnienie „Sending access”
- *   FORMULARZ_ODBIORCA  (Text)    dokąd trafiają zgłoszenia, np. kontakt@grupa-nieruchomosci.pl
- *   FORMULARZ_NADAWCA   (Text)    nadawca z ZWERYFIKOWANEJ w Resend domeny, np. "Grupa Nieruchomości <formularz@grupa-nieruchomosci.pl>"
+ *   FORMULARZ_ODBIORCA  (Text)    dokąd trafiają zgłoszenia, np. kontakt@xn--grupa-nieruchomoci-mod.pl (= kontakt@grupa-nieruchomości.pl)
+ *   FORMULARZ_NADAWCA   (Text)    nadawca z ZWERYFIKOWANEJ w Resend domeny, np. "Grupa Nieruchomości <formularz@xn--grupa-nieruchomoci-mod.pl>"
  *   DOZWOLONE_ORIGINY   (Text)    adresy stron, z których wolno wysyłać formularz, rozdzielone przecinkami
  */
 
@@ -70,7 +70,7 @@ async function obsluzZapytanie(req: Request, env: Env): Promise<Response> {
 
   if (!env.RESEND_API_KEY || !env.FORMULARZ_ODBIORCA || !env.FORMULARZ_NADAWCA) {
     console.error('[formularz] Brak konfiguracji: RESEND_API_KEY / FORMULARZ_ODBIORCA / FORMULARZ_NADAWCA');
-    return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomosci.pl.' }, 503);
+    return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomości.pl.' }, 503);
   }
 
   const spotkanie = tekst(dane, 'typ') === 'spotkanie';
@@ -115,11 +115,11 @@ ${wygladaJakEmail(kontakt) ? '<p style="color:#4A5663;font-size:13px">Odpowiedz 
     });
     if (!odp.ok) {
       console.error('[formularz] Resend odpowiedział', odp.status, await odp.text());
-      return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomosci.pl.' }, 502);
+      return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomości.pl.' }, 502);
     }
   } catch (e) {
     console.error('[formularz] Błąd połączenia z Resend', e);
-    return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomosci.pl.' }, 502);
+    return json({ ok: false, blad: 'Nie udało się wysłać zgłoszenia. Zadzwoń albo napisz na kontakt@grupa-nieruchomości.pl.' }, 502);
   }
 
   return json({ ok: true, wyslanoEmail: true });

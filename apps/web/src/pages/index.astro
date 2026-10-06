@@ -1,4 +1,5 @@
 ---
+import { mailto } from '../lib/email';
 import Base from '../layouts/Base.astro';
 import Formularz from '../components/Formularz.astro';
 import Partnerstwo from '../components/Partnerstwo.astro';
@@ -173,7 +174,7 @@ const { sciezki, dzialania, model } = strona;
         <p>{strona.kontaktOpis}</p>
         <dl class="kontakt__dane">
           <div><dt>Telefon</dt><dd><a class="kontakt__telefon" href={firma.telefonHref}>{firma.telefon}</a></dd></div>
-          <div><dt>E-mail</dt><dd><a href={`mailto:${firma.email}`}>{firma.email}</a></dd></div>
+          <div><dt>E-mail</dt><dd><a href={mailto(firma.email)}>{firma.email}</a></dd></div>
           <div><dt>Biuro</dt><dd>{firma.biuro.ulica}<br />{firma.biuro.kod} {firma.biuro.miasto}</dd></div>
           <div><dt>Obszar działania</dt><dd>{firma.obszar}</dd></div>
         </dl>

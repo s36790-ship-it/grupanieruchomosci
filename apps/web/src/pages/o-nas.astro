@@ -1,4 +1,5 @@
 ---
+import { mailto } from '../lib/email';
 import Base from '../layouts/Base.astro';
 import Partnerstwo from '../components/Partnerstwo.astro';
 import { firma } from '../data/site';
@@ -106,7 +107,7 @@ import { firma } from '../data/site';
         <h2>Porozmawiajmy</h2>
         <p>Biuro: {firma.biuro.ulica}, {firma.biuro.kod} {firma.biuro.miasto}.</p>
         <p><a class="duzy" href={firma.telefonHref}>{firma.telefon}</a></p>
-        <p><a href={`mailto:${firma.email}`}>{firma.email}</a></p>
+        <p><a href={mailto(firma.email)}>{firma.email}</a></p>
       </div>
       <a class="przycisk" href="/kontakt">Napisz do nas</a>
     </div>

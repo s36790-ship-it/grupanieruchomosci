@@ -1,4 +1,5 @@
 ---
+import { mailto } from '../lib/email';
 import { firma, uslugi } from '../data/site';
 import Partnerstwo from '../components/Partnerstwo.astro';
 import { pobierzPoradniki } from '../lib/cms';
@@ -44,7 +45,7 @@ const rok = new Date().getFullYear();
         <li>NIP {firma.nip}</li>
         <li>KRS {firma.krs}</li>
         <li><a href={firma.telefonHref}>{firma.telefon}</a></li>
-        <li><a href={`mailto:${firma.email}`}>{firma.email}</a></li>
+        <li><a href={mailto(firma.email)}>{firma.email}</a></li>
       </ul>
     </div>
   </div>
