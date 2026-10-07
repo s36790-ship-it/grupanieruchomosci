@@ -14,7 +14,7 @@
   },
   "observability": { "enabled": true },
   "vars": {
-    "FORMULARZ_ODBIORCA": "kontakt@xn--grupa-nieruchomoci-mod.pl",
+    "FORMULARZ_ODBIORCA": "t.brynkiewicz@gmail.com",
     "FORMULARZ_NADAWCA": "Grupa Nieruchomości <formularz@xn--grupa-nieruchomoci-mod.pl>",
     "DOZWOLONE_ORIGINY": "https://xn--grupa-nieruchomoci-mod.pl,https://www.xn--grupa-nieruchomoci-mod.pl"
   }
