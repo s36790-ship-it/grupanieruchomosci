@@ -6,6 +6,7 @@ import Partnerstwo from '../components/Partnerstwo.astro';
 import Scrolly from '../components/Scrolly.astro';
 import Kreator from '../components/Kreator.astro';
 import { pobierzStroneGlowna, pobierzUstawienia } from '../lib/cms';
+import { witryna } from '../lib/seo';
 
 const strona = await pobierzStroneGlowna();
 const firma = await pobierzUstawienia();
@@ -14,6 +15,7 @@ const { sciezki, dzialania, model } = strona;
 <Base
   title="Grupa Nieruchomości — sprzedaż, kupno i mieszkania pod klucz w Białymstoku"
   description="Pomagamy sprzedać, kupić i przygotować nieruchomość w Białymstoku i województwie podlaskim. Bezpłatna wycena, home staging, remonty i projekty inwestycyjne."
+  daneStrukturalne={[witryna]}
 >
   <section class="hero">
     <div class="hero__tresc">
@@ -76,6 +78,7 @@ const { sciezki, dzialania, model } = strona;
         </ul>
         <a class="link-mocny" href="/zwiekszamy-wartosc">Jak dobieramy działania</a>
       </div>
+    </div>
   </section>
 
   <section class="sekcja sekcja--szara" aria-labelledby="decyzja-tytul">

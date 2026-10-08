@@ -1,6 +1,7 @@
 ---
 import { mailto } from '../lib/email';
 import Base from '../layouts/Base.astro';
+import { okruchy } from '../lib/seo';
 import Formularz from '../components/Formularz.astro';
 import { firma } from '../data/site';
 ---
@@ -8,6 +9,7 @@ import { firma } from '../data/site';
   title="Kontakt — Grupa Nieruchomości Białystok"
   description="Napisz lub zadzwoń: +48 608 642 999, kontakt@grupa-nieruchomości.pl. Biuro przy ul. Pięknej 5 w Białymstoku. Wycena nieruchomości jest bezpłatna."
   image="/images/kontakt.jpg"
+  daneStrukturalne={[okruchy([['Strona główna', '/'], ['Kontakt', '/kontakt']])]}
 >
   <section class="sekcja">
     <div class="kontener kontakt">

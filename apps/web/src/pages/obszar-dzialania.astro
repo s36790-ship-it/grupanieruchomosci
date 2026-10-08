@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { okruchy } from '../lib/seo';
 import { pobierzLokalizacje, pobierzUslugi, pobierzUstawienia } from '../lib/cms';
 
 const [lokalizacje, uslugi, firma] = await Promise.all([pobierzLokalizacje(), pobierzUslugi(), pobierzUstawienia()]);
@@ -19,6 +20,7 @@ const glowneUslugi = uslugi.filter((u) => ['sprzedaz-nieruchomosci', 'kupno-nier
   title="Obszar działania — Białystok i województwo podlaskie | Grupa Nieruchomości"
   description="Sprzedaż, kupno, mieszkania pod klucz i inwestycje w Białymstoku oraz w miejscowościach województwa podlaskiego. Sprawdź, w czym pomagamy w Twojej okolicy."
   image="/images/lokalizacje-miasto.jpg"
+  daneStrukturalne={[okruchy([['Strona główna', '/'], ['Obszar działania', '/obszar-dzialania']])]}
 >
   <nav class="okruchy" aria-label="Ścieżka nawigacji">
     <div class="kontener">

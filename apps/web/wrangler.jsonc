@@ -9,8 +9,9 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    // Worker uruchamia się tylko dla /api/* — reszta to pliki statyczne (bez zużycia CPU).
-    "run_worker_first": ["/api/*"]
+    // Worker uruchamia się przy każdym żądaniu: przekierowuje www/http na adres kanoniczny (301),
+    // obsługuje /api/*, a resztę oddaje z plików statycznych. Darmowy plan: 100 tys. żądań dziennie.
+    "run_worker_first": true
   },
   "observability": { "enabled": true },
   "vars": {

@@ -4,6 +4,7 @@ import Formularz from '../components/Formularz.astro';
 import BlokLokalny from '../components/BlokLokalny.astro';
 import PrzedPo from '../components/PrzedPo.astro';
 import { pobierzUslugi, pobierzUstawienia, pobierzLokalizacje, pobierzPoradniki } from '../lib/cms';
+import { okruchy, usluga } from '../lib/seo';
 
 export async function getStaticPaths() {
   const [uslugi, lokalizacje, poradniki] = await Promise.all([pobierzUslugi(), pobierzLokalizacje(), pobierzPoradniki()]);
@@ -56,9 +57,15 @@ const daneLokalne = lok
         name: lok.tytul,
         serviceType: lok.uslugaNazwa,
         areaServed: { '@type': 'Place', name: lok.miejscowosc },
-        provider: { '@type': 'RealEstateAgent', name: 'Grupa Nieruchomości', url: Astro.site?.href },
+        provider: { '@id': 'https://xn--grupa-nieruchomoci-mod.pl/#firma' },
         url: adresStrony,
       },
+    ]
+  : [];
+const daneUslugi = u
+  ? [
+      okruchy([['Strona główna', '/'], [u.nazwa, `/${u.slug}`]]),
+      usluga({ nazwa: u.nazwa, opis: u.metaDescription, sciezka: `/${u.slug}` }),
     ]
   : [];
 const [pierwszyBlok, ...kolejneBloki] = lok?.bloki ?? [];
@@ -172,7 +179,7 @@ const firma = await pobierzUstawienia();
     </section>
   </Base>
 ) : (
-<Base title={u.metaTitle} description={u.metaDescription} image={u.obraz} faq={t.faq}>
+<Base title={u.metaTitle} description={u.metaDescription} image={u.obraz} faq={t.faq} daneStrukturalne={daneUslugi}>
 
   <nav class="okruchy" aria-label="Ścieżka nawigacji">
     <div class="kontener">

@@ -1,6 +1,7 @@
 ---
 import { mailto } from '../lib/email';
 import Base from '../layouts/Base.astro';
+import { okruchy } from '../lib/seo';
 import Partnerstwo from '../components/Partnerstwo.astro';
 import { firma } from '../data/site';
 ---
@@ -8,6 +9,7 @@ import { firma } from '../data/site';
   title="O nas — Grupa Nieruchomości, Autoryzowany Partner Zboralscy Group"
   description="Kim jesteśmy, jak pracujemy i gdzie działamy. Pośrednictwo, przygotowanie nieruchomości i projekty inwestycyjne w Białymstoku i województwie podlaskim."
   image="/images/o-nas-hero.jpg"
+  daneStrukturalne={[okruchy([['Strona główna', '/'], ['O nas', '/o-nas']])]}
 >
   <nav class="okruchy" aria-label="Ścieżka nawigacji">
     <div class="kontener">

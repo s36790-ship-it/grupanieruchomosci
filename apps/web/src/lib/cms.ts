@@ -39,9 +39,14 @@ export type UslugaZTrescia = {
   metaTitle: string;
   metaDescription: string;
   wstep: string[];
+  procesTytul: string;
   proces: { nazwa: string; opis: string }[];
+  blokTytul?: string;
+  blok?: { nazwa: string; opis: string }[];
+  zakresTytul: string;
   zakres: string[];
   uwaga?: string;
+  faqTytul: string;
   faq: { pytanie: string; odpowiedz: string }[];
   ctaTytul: string;
   ctaOpis: string;
@@ -73,9 +78,15 @@ export async function pobierzUslugi(): Promise<UslugaZTrescia[]> {
       metaTitle: d.seo?.metaTitle || zapas?.metaTitle || d.nazwa,
       metaDescription: d.seo?.metaDescription || zapas?.metaDescription || d.lead,
       wstep: (d.wstep ?? []).map((a: any) => a.tresc),
+      // Tytuły sekcji: z CMS, a gdy ich tam nie ma — z treści lokalnych. Pusty <h2> szkodzi SEO i dostępności.
+      procesTytul: d.procesTytul || zapasTresc?.procesTytul || 'Jak to wygląda u nas',
       proces: (d.proces ?? []).map((k: any) => ({ nazwa: k.nazwa, opis: k.opis })),
+      blokTytul: d.blokTytul || zapasTresc?.blokTytul,
+      blok: zapasTresc?.blok,
+      zakresTytul: d.zakresTytul || zapasTresc?.zakresTytul || 'Zakres współpracy',
       zakres: (d.zakres ?? []).map((z: any) => z.tresc),
       uwaga: d.uwaga || undefined,
+      faqTytul: d.faqTytul || zapasTresc?.faqTytul || 'Pytania i odpowiedzi',
       faq: (d.faq ?? []).map((p: any) => ({ pytanie: p.pytanie, odpowiedz: p.odpowiedz })),
       przedPo:
         d.przedPo?.przed?.url && d.przedPo?.po?.url

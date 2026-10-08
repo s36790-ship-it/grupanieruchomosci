@@ -1,7 +1,8 @@
 /**
  * Worker Cloudflare dla grupa-nieruchomości.pl
  *
- * - Strona jest w pełni statyczna (Astro → dist/) i serwowana jako „static assets” — bez zużycia CPU Workera.
+ * - Strona jest w pełni statyczna (Astro → dist/) i serwowana jako „static assets”.
+ * - Worker przekierowuje www i http na https://grupa-nieruchomości.pl (301).
  * - Worker obsługuje tylko POST /api/zapytanie: waliduje zgłoszenie z formularza i wysyła je e-mailem przez Resend.
  *
  * Konfiguracja (Cloudflare → Workers → grupa-nieruchomosci → Settings → Variables and Secrets):
@@ -125,9 +126,18 @@ ${wygladaJakEmail(kontakt) ? '<p style="color:#4A5663;font-size:13px">Odpowiedz 
   return json({ ok: true, wyslanoEmail: true });
 }
 
+// Jeden adres kanoniczny: https, bez „www”. Inne warianty dostają 301, żeby Google nie widział duplikatów.
+const KANONICZNY_HOST = 'xn--grupa-nieruchomoci-mod.pl';
+
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
-    const { pathname } = new URL(req.url);
+    const url = new URL(req.url);
+    const { pathname } = url;
+    if (url.hostname === `www.${KANONICZNY_HOST}` || (url.hostname === KANONICZNY_HOST && url.protocol === 'http:')) {
+      url.hostname = KANONICZNY_HOST;
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
     if (pathname === '/api/zapytanie') return obsluzZapytanie(req, env);
     if (pathname.startsWith('/api/')) return json({ ok: false, blad: 'Nie znaleziono.' }, 404);
     return env.ASSETS.fetch(req);

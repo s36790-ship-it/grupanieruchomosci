@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import Cookies from '../components/Cookies.astro';
 import Panorama from '../components/Panorama.astro';
 import { firma } from '../data/site';
+import { ID_FIRMY } from '../lib/seo';
 
 interface Props {
   title: string;
@@ -22,9 +23,11 @@ const obrazAbs = new URL(image, Astro.site).href;
 const dane = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
+  '@id': ID_FIRMY,
   name: firma.nazwa,
   legalName: firma.nazwaPrawna,
   url: Astro.site?.href,
+  image: new URL('/images/og-default.jpg', Astro.site).href,
   telephone: firma.telefon,
   email: emailAscii(firma.email),
   address: {
